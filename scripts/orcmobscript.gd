@@ -64,6 +64,8 @@ func mobhit():
 		dieing = true
 		$AnimatedSprite2D.play("die")
 		spawn_xp()
+		var main = get_tree().current_scene
+		main.kill()
 		await get_tree().create_timer(2.60).timeout
 		queue_free()
 

@@ -33,3 +33,11 @@ func spawn_mobs():
 		mob.global_position = player.global_position + offset
 
 		get_parent().add_child.call_deferred(mob)
+		
+		
+		
+		
+func kill():
+	var kills = get_node("/root/Node2D/CanvasLayer/MarginContainer/VBoxContainer/kills")
+	kills.text = str(int(kills.text) + 1)
+	
