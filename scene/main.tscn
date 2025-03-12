@@ -1,0 +1,89 @@
+[gd_scene load_steps=10 format=3 uid="uid://cmvyijux05kss"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_6rs0y"]
+[ext_resource type="PackedScene" uid="uid://cubrgd2gldmlu" path="res://scene/player.tscn" id="1_rvfi3"]
+[ext_resource type="Texture2D" uid="uid://dkiw0v1kp0u5b" path="res://textures/icon.svg" id="2_dwxpy"]
+[ext_resource type="PackedScene" uid="uid://ciuryqbhq6oqk" path="res://scene/background.tscn" id="3_m5u3t"]
+[ext_resource type="PackedScene" uid="uid://bwn3w46v2727p" path="res://scene/orcmob.tscn" id="4_wb5ar"]
+[ext_resource type="Texture2D" uid="uid://beft6x5kngd2n" path="res://textures/FreeHorrorUi.png" id="5_rcsi2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x1t6x"]
+atlas = ExtResource("5_rcsi2")
+region = Rect2(135, 105, 18, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_78mqh"]
+atlas = ExtResource("5_rcsi2")
+region = Rect2(167, 105, 18, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ggrp4"]
+atlas = ExtResource("5_rcsi2")
+region = Rect2(199, 105, 19, 15)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_6rs0y")
+mob_scene = ExtResource("4_wb5ar")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(1907, 973)
+scale = Vector2(11.2656, 21.5313)
+texture = ExtResource("2_dwxpy")
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("3_m5u3t")]
+position = Vector2(3566, -654)
+
+[node name="player" parent="." instance=ExtResource("1_rvfi3")]
+position = Vector2(984, 432)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+
+[node name="heart 1" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(72, 64)
+scale = Vector2(6, 6)
+texture = SubResource("AtlasTexture_x1t6x")
+
+[node name="heart 2" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(184, 64)
+scale = Vector2(6, 6)
+texture = SubResource("AtlasTexture_x1t6x")
+
+[node name="heart 3" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(296, 64)
+scale = Vector2(6, 6)
+texture = SubResource("AtlasTexture_x1t6x")
+
+[node name="halfhear 1" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(72, 64)
+scale = Vector2(6, 6)
+texture = SubResource("AtlasTexture_78mqh")
+
+[node name="halfhear 2" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(184, 64)
+scale = Vector2(6, 6)
+texture = SubResource("AtlasTexture_78mqh")
+
+[node name="halfhear 3" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(296, 64)
+scale = Vector2(6, 6)
+texture = SubResource("AtlasTexture_78mqh")
+
+[node name="noheart 1" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(72, 64)
+scale = Vector2(6, 6)
+texture = SubResource("AtlasTexture_ggrp4")
+
+[node name="noheart 2" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(192, 64)
+scale = Vector2(6, 6)
+texture = SubResource("AtlasTexture_ggrp4")
+
+[node name="noheart 3" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(296, 64)
+scale = Vector2(6, 6)
+texture = SubResource("AtlasTexture_ggrp4")

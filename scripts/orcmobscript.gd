@@ -1,0 +1,66 @@
+extends CharacterBody2D
+#this is mob scriptet
+var speed = 200
+var player = null
+var inAttackZone = false
+var attacking = false
+var mobhp = 100
+var dieing = false
+var hitani = false
+
+func _ready():
+	player = get_node("/root/Node2D/player") 
+	$Area2D.body_entered.connect(_on_Area2D_body_entered)
+	$Area2D.body_exited.connect(_on_Area2D_body_exited)
+	_attack_loop()
+	
+func _physics_process(_delta):
+	if not inAttackZone and not attacking and not dieing: 
+		var direction = (player.global_position - global_position).normalized()
+		global_position += direction * speed * _delta
+		if not hitani:
+			#$AnimatedSprite2D.animation = "run"
+			$AnimatedSprite2D.play("run")
+# Flip sprite based on direction
+		if direction.x > 0:
+			$AnimatedSprite2D.flip_h = false
+		elif direction.x < 0:
+			$AnimatedSprite2D.flip_h = true
+
+func _attack_loop() -> void:
+	while true:
+		await get_tree().process_frame
+		if inAttackZone and not attacking and not dieing:
+			attacking = true
+			$AnimatedSprite2D.play("attack")
+			await get_tree().create_timer(0.42).timeout
+			if inAttackZone and player:  # optional check
+				player.hit()
+				print("hit")
+			await get_tree().create_timer(0.30).timeout
+			attacking = false
+		else:
+			attacking = false
+
+func _on_Area2D_body_entered(body):
+	if body == player:
+		inAttackZone = true
+
+func _on_Area2D_body_exited(body):
+	if body == player:
+		inAttackZone = false
+
+
+
+func mobhit():
+	mobhp -= 25
+	if mobhp > 0:
+		hitani = true
+		$AnimatedSprite2D.play("hit")
+		await get_tree().create_timer(0.4).timeout
+		hitani = false
+	if mobhp <= 0 and not dieing:
+		dieing = true
+		$AnimatedSprite2D.play("die")
+		await get_tree().create_timer(2.60).timeout
+		queue_free()

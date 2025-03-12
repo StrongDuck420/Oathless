@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://ciuryqbhq6oqk"]
+
+[ext_resource type="Texture2D" uid="uid://f4wn3lgq3ybr" path="res://textures/diego-lopez-groundtiles.jpg" id="1_3tymf"]
+
+[node name="background" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1689.6, 1689.6)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+scale = Vector2(3.3, 3.3)
+texture = ExtResource("1_3tymf")
+centered = false
