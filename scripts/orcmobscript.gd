@@ -38,7 +38,6 @@ func _attack_loop() -> void:
 			await get_tree().create_timer(0.42).timeout
 			if inAttackZone and player:  # optional check
 				player.hit()
-				print("hit")
 			await get_tree().create_timer(0.30).timeout
 			attacking = false
 		else:
