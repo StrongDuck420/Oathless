@@ -18,8 +18,11 @@ func _ready():
 	
 func _physics_process(_delta):
 	if not inAttackZone and not attacking and not dieing: 
+		#var direction = (player.global_position - global_position).normalized()
+		#global_position += direction * speed * _delta
 		var direction = (player.global_position - global_position).normalized()
-		global_position += direction * speed * _delta
+		velocity = direction * speed
+		move_and_slide()
 		if not hitani:
 			#$AnimatedSprite2D.animation = "run"
 			$AnimatedSprite2D.play("run")
@@ -64,10 +67,12 @@ func mobhit():
 		dieing = true
 		$AnimatedSprite2D.play("die")
 		spawn_xp()
+		$CollisionShape2D.call_deferred("set_disabled", true)
 		var main = get_tree().current_scene
 		main.kill()
 		await get_tree().create_timer(2.60).timeout
-		queue_free()
+		var a = get_parent()
+		a.queue_free()
 
 
 func spawn_xp():

@@ -26,6 +26,8 @@ func get_input():
 			$hooded.flip_h = true
 		if Input.is_action_just_pressed("right"):
 			$hooded.flip_h = false
+	else:
+		velocity = Vector2.ZERO
 
 #process your moving i guess
 func _physics_process(_delta):

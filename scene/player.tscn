@@ -317,5 +317,3 @@ position = Vector2(3, 3)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_ecauk")
 animation = &"blood1"
-frame = 18
-frame_progress = 1.0
