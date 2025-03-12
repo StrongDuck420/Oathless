@@ -1,5 +1,7 @@
 extends CharacterBody2D
 #this is mob scriptet
+@export var xp_scene: PackedScene
+
 var speed = 200
 var player = null
 var inAttackZone = false
@@ -62,5 +64,12 @@ func mobhit():
 	if mobhp <= 0 and not dieing:
 		dieing = true
 		$AnimatedSprite2D.play("die")
+		spawn_xp()
 		await get_tree().create_timer(2.60).timeout
 		queue_free()
+
+
+func spawn_xp():
+	var xp = xp_scene.instantiate()
+	xp.global_position = global_position
+	get_tree().current_scene.call_deferred("add_child", xp)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=34 format=3 uid="uid://bwn3w46v2727p"]
+[gd_scene load_steps=35 format=3 uid="uid://bwn3w46v2727p"]
 
 [ext_resource type="Texture2D" uid="uid://de7xjkvrommvd" path="res://textures/Orc.png" id="1_l6s7j"]
 [ext_resource type="Script" path="res://scripts/orcmobscript.gd" id="1_pfdau"]
+[ext_resource type="PackedScene" uid="uid://c364sikkxtaxt" path="res://scene/xppoint.tscn" id="2_1ajdo"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fauda"]
 radius = 24.0
@@ -238,6 +239,7 @@ radius = 58.0775
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 script = ExtResource("1_pfdau")
+xp_scene = ExtResource("2_1ajdo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(2, -2)

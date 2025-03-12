@@ -15,3 +15,7 @@ func _on_Area2D_body_entered(body):
 		await $AnimatedSprite2D.animation_finished
 		queue_free()  # Optional: destroy bullet on hit
 # make damagae animation and explosion animation and hit sound
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	queue_free()
