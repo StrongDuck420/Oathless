@@ -5,6 +5,7 @@ extends CharacterBody2D
 var heart_images = []
 var current_heart_index = 0
 var dead = false
+var shootdelay = false
 
 func _ready():
 	var main_scene = get_node("/root/Node2D")
@@ -40,18 +41,22 @@ func _physics_process(_delta):
 			$hooded.play("idle")
 
 func shoot():
-	var p = projectile.instantiate()
-	owner.add_child(p)
-	#start at player pos
-	var start_pos = global_position
-	p.global_position = start_pos
-	var mouse_pos = get_global_mouse_position()
+	if not shootdelay:
+		shootdelay = true
+		var p = projectile.instantiate()
+		owner.add_child(p)
+		#start at player pos
+		var start_pos = global_position
+		p.global_position = start_pos
+		var mouse_pos = get_global_mouse_position()
 
-	# Calculate direction towards mouse position
-	var direction = (mouse_pos - start_pos).normalized()
-	# Set the velocity of the projectile
-	# Set direction in the projectile
-	p.rotation = direction.angle()
+		# Calculate direction towards mouse position
+		var direction = (mouse_pos - start_pos).normalized()
+		# Set the velocity of the projectile
+		# Set direction in the projectile
+		p.rotation = direction.angle()
+		await get_tree().create_timer(0.2).timeout
+		shootdelay = false
 
 func hit():
 	if current_heart_index < heart_images.size():
