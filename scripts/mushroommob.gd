@@ -9,6 +9,7 @@ var attacking = false
 var mobhp = 160
 var dieing = false
 var hitani = false
+var push_force: Vector2 = Vector2.ZERO
 
 func _ready():
 	player = get_node("/root/Node2D/player") 
@@ -22,8 +23,9 @@ func _physics_process(_delta):
 		#var direction = (player.global_position - global_position).normalized()
 		#global_position += direction * speed * _delta
 		var direction = (player.global_position - global_position).normalized()
-		velocity = direction * speed
+		velocity = direction * speed + push_force
 		move_and_slide()
+		push_force = lerp(push_force, Vector2.ZERO, 10 * _delta)  # smooth decay
 		if not hitani:
 			$AnimatedSprite2D.play("run")
 # Flip sprite based on direction
@@ -85,3 +87,9 @@ func spawn_xp():
 		xp.global_position = self.global_position + offset
 		get_tree().current_scene.call_deferred("add_child", xp)
 		print(i)
+
+
+
+func apply_push_force(force: Vector2):
+	push_force += force
+	print("Received push force: ", force)

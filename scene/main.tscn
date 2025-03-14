@@ -169,8 +169,5 @@ autostart = true
 [node name="Node2D" parent="." instance=ExtResource("9_d1120")]
 position = Vector2(808, 464)
 
-[node name="penguboss" parent="." instance=ExtResource("8_jqyms")]
-position = Vector2(-480, 520)
-
 [connection signal="timeout" from="mmobtimer" to="." method="_on_mmobtimer_timeout"]
 [connection signal="timeout" from="orcmobtimer" to="." method="_on_orcmobtimer_timeout"]
