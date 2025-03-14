@@ -34,6 +34,7 @@ func get_input():
 func _physics_process(_delta):
 	get_input()
 	move_and_slide()
+	z_index = int(global_position.y)
 	if not dead:
 		if velocity.length() > 0:
 			$hooded.play("running")

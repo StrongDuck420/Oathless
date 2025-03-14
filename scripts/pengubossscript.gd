@@ -16,6 +16,7 @@ var jumping = false
 var rng = RandomNumberGenerator.new()
 var shake_strength: float = 8.0
 var player_camera = null
+var nearby_enemies: Array = [] ######################
 
 func _ready():
 	player = get_node("/root/Node2D/player") 
@@ -24,10 +25,13 @@ func _ready():
 	$longattack.body_exited.connect(_on_Area2D_body_exiteds)
 	$shortattack.body_entered.connect(_on_Area2D_body_entered)
 	$shortattack.body_exited.connect(_on_Area2D_body_exited)
+	$pushArea.body_entered.connect(_on_push_area_body_entered)###############
+	$pushArea.body_exited.connect(_on_push_area_body_exited) ##############
 	_attack_loop1()
 	_attack_loop2()
 
 func _physics_process(_delta):
+	z_index = int(global_position.y)
 	if not inshortAttackZone and not inlongAttackZone and not attacking and not dieing: 
 		direction = (player.global_position - global_position).normalized()
 		if not jumping:
@@ -35,6 +39,7 @@ func _physics_process(_delta):
 
 		# Apply velocity to movement
 		move_and_slide()
+		
 # Flip sprite based on direction
 		if direction.x > 0:
 			$AnimatedSprite2D.flip_h = false
@@ -44,7 +49,18 @@ func _physics_process(_delta):
 		shake_strength = lerpf(shake_strength, 0, shakeFade * _delta)
 		
 		player_camera.offset = random0ffset()
-			
+	
+	for enemy in nearby_enemies:
+		if enemy and enemy != self:
+			var push_dir = (enemy.global_position - global_position).normalized()
+			if enemy.has_method("apply_push_force"):  # safer
+				enemy.apply_push_force(push_dir * 100)  # You can tweak force here
+
+	
+	
+	
+	
+	
 func jump():
 	jumping = true
 	$longattack/CollisionShape2D.disabled = true
@@ -56,11 +72,14 @@ func jump():
 	await get_tree().create_timer(0.5).timeout
 
 	velocity = Vector2.ZERO
+	$impact.visible = true
+	$impact.play("impact")
 	apply_shake()
 	await $AnimatedSprite2D.animation_finished
 	$longattack/CollisionShape2D.disabled = false
 	$shortattack/CollisionShape2D.disabled = false
 	await get_tree().create_timer(0.1).timeout
+	$impact.visible = false
 	jumping = false
 		
 
@@ -131,7 +150,15 @@ func mobhit():
 	#get_tree().current_scene.call_deferred("add_child", xp)
 	
 	
+func _on_push_area_body_entered(body):
+	# Only push other enemies (exclude player or self)
+	if body != self and body is CharacterBody2D:
+		nearby_enemies.append(body)
+
+func _on_push_area_body_exited(body):
+	nearby_enemies.erase(body)
 	
+
 	
 	
 

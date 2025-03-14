@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cmvyijux05kss"]
+[gd_scene load_steps=15 format=3 uid="uid://cmvyijux05kss"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_6rs0y"]
 [ext_resource type="PackedScene" uid="uid://cubrgd2gldmlu" path="res://scene/player.tscn" id="1_rvfi3"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://beft6x5kngd2n" path="res://textures/FreeHorrorUi.png" id="5_rcsi2"]
 [ext_resource type="PackedScene" uid="uid://d7wrvfvuxdlt" path="res://scene/mushroommob.tscn" id="7_d6mph"]
 [ext_resource type="PackedScene" uid="uid://cbg8y8fvx44nl" path="res://scene/penguboss.tscn" id="8_jqyms"]
+[ext_resource type="PackedScene" uid="uid://kppx8kgl57ia" path="res://scene/chest.tscn" id="9_d1120"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wnhx0"]
 atlas = ExtResource("5_rcsi2")
@@ -138,6 +139,25 @@ grow_horizontal = 0
 scale = Vector2(2, 2)
 texture = SubResource("AtlasTexture_kat81")
 
+[node name="level" type="MarginContainer" parent="CanvasLayer"]
+top_level = true
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -30.0
+offset_right = 18.0
+offset_bottom = 40.0
+grow_horizontal = 2
+scale = Vector2(2.5, 2.5)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/level"]
+layout_mode = 2
+
+[node name="kills" type="Label" parent="CanvasLayer/level/VBoxContainer"]
+layout_mode = 2
+text = "Level 1"
+horizontal_alignment = 1
+
 [node name="mmobtimer" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
@@ -146,8 +166,11 @@ autostart = true
 wait_time = 3.0
 autostart = true
 
+[node name="Node2D" parent="." instance=ExtResource("9_d1120")]
+position = Vector2(808, 464)
+
 [node name="penguboss" parent="." instance=ExtResource("8_jqyms")]
-position = Vector2(-80, 440)
+position = Vector2(-480, 520)
 
 [connection signal="timeout" from="mmobtimer" to="." method="_on_mmobtimer_timeout"]
 [connection signal="timeout" from="orcmobtimer" to="." method="_on_orcmobtimer_timeout"]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=53 format=3 uid="uid://cbg8y8fvx44nl"]
+[gd_scene load_steps=63 format=3 uid="uid://cbg8y8fvx44nl"]
 
 [ext_resource type="Texture2D" uid="uid://116igi3l05h4" path="res://textures/pengu_idle.png" id="1_0btv3"]
 [ext_resource type="Texture2D" uid="uid://cmwet84nkelg5" path="res://textures/pengu_attack_peck.png" id="1_6e8aj"]
 [ext_resource type="Script" path="res://scripts/pengubossscript.gd" id="1_7ta8w"]
+[ext_resource type="Texture2D" uid="uid://cac1jkj663uvv" path="res://textures/Impact Spritesheet.png" id="2_m2hqh"]
 [ext_resource type="Texture2D" uid="uid://c3iven3ujq7hm" path="res://textures/pengu_attack_ray.png" id="2_u7t83"]
 [ext_resource type="Texture2D" uid="uid://d1ke66r72mesp" path="res://textures/pengu_move.png" id="4_81hm2"]
 [ext_resource type="Texture2D" uid="uid://c07wkwynl8t0" path="res://textures/pengu_hurt.png" id="4_yaqsq"]
@@ -10,6 +11,63 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ngli8"]
 radius = 24.0
 height = 48.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6ldd"]
+atlas = ExtResource("2_m2hqh")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b54vs"]
+atlas = ExtResource("2_m2hqh")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kcah3"]
+atlas = ExtResource("2_m2hqh")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hkny4"]
+atlas = ExtResource("2_m2hqh")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3tobi"]
+atlas = ExtResource("2_m2hqh")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5equg"]
+atlas = ExtResource("2_m2hqh")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cll0k"]
+atlas = ExtResource("2_m2hqh")
+region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fjlfs"]
+animations = [{
+"frames": [{
+"duration": 0.3,
+"texture": SubResource("AtlasTexture_h6ldd")
+}, {
+"duration": 0.3,
+"texture": SubResource("AtlasTexture_b54vs")
+}, {
+"duration": 0.3,
+"texture": SubResource("AtlasTexture_kcah3")
+}, {
+"duration": 0.3,
+"texture": SubResource("AtlasTexture_hkny4")
+}, {
+"duration": 0.3,
+"texture": SubResource("AtlasTexture_3tobi")
+}, {
+"duration": 0.3,
+"texture": SubResource("AtlasTexture_5equg")
+}, {
+"duration": 0.3,
+"texture": SubResource("AtlasTexture_cll0k")
+}],
+"loop": false,
+"name": &"impact",
+"speed": 5.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ry6vg"]
 atlas = ExtResource("1_6e8aj")
@@ -334,12 +392,15 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s4vsk"]
-radius = 30.0
-height = 148.0
+radius = 44.0
+height = 252.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lff3g"]
 radius = 144.0
 height = 288.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sx173"]
+radius = 176.0
 
 [node name="penguboss" type="Node2D"]
 
@@ -351,6 +412,14 @@ position = Vector2(-8, -64)
 scale = Vector2(4, 4)
 shape = SubResource("CapsuleShape2D_ngli8")
 
+[node name="impact" type="AnimatedSprite2D" parent="boss"]
+position = Vector2(4.76837e-07, -80)
+scale = Vector2(10, 10)
+sprite_frames = SubResource("SpriteFrames_fjlfs")
+animation = &"impact"
+frame = 6
+frame_progress = 1.0
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="boss"]
 position = Vector2(-24, -144)
 scale = Vector2(3, 3)
@@ -361,7 +430,7 @@ frame_progress = 0.0793491
 [node name="longattack" type="Area2D" parent="boss"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="boss/longattack"]
-position = Vector2(144, -72)
+position = Vector2(-16, -88)
 rotation = 1.5708
 scale = Vector2(4, 4)
 shape = SubResource("CapsuleShape2D_s4vsk")
@@ -371,3 +440,9 @@ shape = SubResource("CapsuleShape2D_s4vsk")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="boss/shortattack"]
 position = Vector2(128, -64)
 shape = SubResource("CapsuleShape2D_lff3g")
+
+[node name="pushArea" type="Area2D" parent="boss"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="boss/pushArea"]
+position = Vector2(-16, -80)
+shape = SubResource("CircleShape2D_sx173")

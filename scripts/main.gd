@@ -6,13 +6,14 @@ extends Node2D
 @export var spawn_radius: float = 900.0
 @export var mobs_per_spawn: int = 1
 @export var mmobs_per_spawn: int = 0
+var level = null
 
 @onready var player = get_node("player") # Change path to your actual player node
 
 func _ready():
 	spawn_mobs() # Initial spawn
+	level = get_node("/root/Node2D/CanvasLayer/level/VBoxContainer/kills")
 	progression()
-	
 
 func spawn_mobs():
 	if player == null:
@@ -23,7 +24,7 @@ func spawn_mobs():
 		
 		# Generate a random angle and distance from the player
 		var angle = randf() * TAU
-		var distance = randf_range(spawn_radius * 0.5, spawn_radius)
+		var distance = randf_range(spawn_radius * 1, spawn_radius)
 		var offset = Vector2(cos(angle), sin(angle)) * distance
 		mob.global_position = player.global_position + offset
 
@@ -66,41 +67,40 @@ func kill():
 	
 	
 	
-	
+
+
 func progression():
 	var infinity = false
 	await get_tree().create_timer(10).timeout
+	level.text = "Level " + str(2)
 	$orcmobtimer.wait_time = 2
 	await get_tree().create_timer(10).timeout
+	level.text = "Level " + str(3)
 	$orcmobtimer.wait_time = 1
 	await get_tree().create_timer(10).timeout
+	level.text = "Level " + str(4)
 	mmobs_per_spawn = 1
 	await get_tree().create_timer(10).timeout
+	level.text = "Level " + str(5)
 	$orcmobtimer.wait_time = 1.5
 	mobs_per_spawn = 2
 	$mmobtimer.wait_time = 4
 	await get_tree().create_timer(10).timeout
+	level.text = "Level " + str(6)
 	$orcmobtimer.wait_time = 1
 	$mmobtimer.wait_time = 3
 	await get_tree().create_timer(10).timeout
+	level.text = "Level Boss"
 	spawn_boss()
 	await get_tree().create_timer(30).timeout
+	level.text = "Level infinity"
 	infinity = true
-	var fasterm = 0.1
-	var fastermm = 0.1
 	while infinity == true:
-		await get_tree().create_timer(5).timeout
-		$orcmobtimer.wait_time -= fasterm
-		$mmobtimer.wait_time -= fastermm
-		if $orcmobtimer.wait_time == 0.1:
-			fasterm = 0.01
-		if $mmobtimer.wait_time == 0.1:
-			fastermm = 0.01
-		if $orcmobtimer.wait_time == 0.01:
-			fasterm = 0.001
-		if $mmobtimer.wait_time == 0.01:
-			fastermm = 0.001
-
+		await get_tree().create_timer(10).timeout
+		$orcmobtimer.wait_time *= 0.9  # 10% decrease
+		$mmobtimer.wait_time *= 0.9
+		if randf() < 0.20:
+			spawn_boss()
 
 
 

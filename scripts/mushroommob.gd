@@ -17,6 +17,7 @@ func _ready():
 	_attack_loop()
 	
 func _physics_process(_delta):
+	z_index = int(global_position.y)
 	if not inAttackZone and not attacking and not dieing: 
 		#var direction = (player.global_position - global_position).normalized()
 		#global_position += direction * speed * _delta
@@ -76,6 +77,11 @@ func mobhit():
 
 
 func spawn_xp():
-	var xp = xp_scene.instantiate()
-	xp.global_position = global_position
-	get_tree().current_scene.call_deferred("add_child", xp)
+	for i in range(5):
+		var xp = xp_scene.instantiate()
+		var angle = randf() * TAU
+		var distance = randf() * 20
+		var offset = Vector2(cos(angle), sin(angle)) * distance
+		xp.global_position = self.global_position + offset
+		get_tree().current_scene.call_deferred("add_child", xp)
+		print(i)

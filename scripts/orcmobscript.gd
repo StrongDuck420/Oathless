@@ -9,6 +9,7 @@ var attacking = false
 var mobhp = 100
 var dieing = false
 var hitani = false
+var push_force: Vector2 = Vector2.ZERO
 
 func _ready():
 	player = get_node("/root/Node2D/player") 
@@ -17,12 +18,15 @@ func _ready():
 	_attack_loop()
 	
 func _physics_process(_delta):
+	z_index = int(global_position.y)
 	if not inAttackZone and not attacking and not dieing: 
 		#var direction = (player.global_position - global_position).normalized()
 		#global_position += direction * speed * _delta
 		var direction = (player.global_position - global_position).normalized()
-		velocity = direction * speed
+		#velocity = direction * speed
+		velocity = direction * speed + push_force
 		move_and_slide()
+		push_force = lerp(push_force, Vector2.ZERO, 10 * _delta)  # smooth decay
 		if not hitani:
 			#$AnimatedSprite2D.animation = "run"
 			$AnimatedSprite2D.play("run")
@@ -79,3 +83,13 @@ func spawn_xp():
 	var xp = xp_scene.instantiate()
 	xp.global_position = global_position
 	get_tree().current_scene.call_deferred("add_child", xp)
+	
+	
+	
+	
+	
+	
+	
+func apply_push_force(force: Vector2):
+	push_force += force
+	print("Received push force: ", force)
