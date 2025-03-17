@@ -23,8 +23,9 @@ func _physics_process(_delta):
 		#var direction = (player.global_position - global_position).normalized()
 		#global_position += direction * speed * _delta
 		var direction = (player.global_position - global_position).normalized()
-		velocity = direction * speed
+		velocity = direction * speed + push_force
 		move_and_slide()
+		push_force = lerp(push_force, Vector2.ZERO, 10 * _delta)  # smooth decay
 		if not hitani:
 			$AnimatedSprite2D.play("run")
 # Flip sprite based on direction
