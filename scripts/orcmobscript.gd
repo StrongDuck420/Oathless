@@ -92,4 +92,3 @@ func spawn_xp():
 	
 func apply_push_force(force: Vector2):
 	push_force += force
-	print("Received push force: ", force)

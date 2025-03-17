@@ -9,6 +9,7 @@ var attacking = false
 var mobhp = 160
 var dieing = false
 var hitani = false
+var push_force: Vector2 = Vector2.ZERO
 
 func _ready():
 	player = get_node("/root/Node2D/player") 
@@ -84,4 +85,6 @@ func spawn_xp():
 		var offset = Vector2(cos(angle), sin(angle)) * distance
 		xp.global_position = self.global_position + offset
 		get_tree().current_scene.call_deferred("add_child", xp)
-		print(i)
+
+func apply_push_force(force: Vector2):
+	push_force += force

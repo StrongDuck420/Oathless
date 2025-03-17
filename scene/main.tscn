@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cmvyijux05kss"]
+[gd_scene load_steps=16 format=3 uid="uid://cmvyijux05kss"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_6rs0y"]
 [ext_resource type="PackedScene" uid="uid://cubrgd2gldmlu" path="res://scene/player.tscn" id="1_rvfi3"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://d7wrvfvuxdlt" path="res://scene/mushroommob.tscn" id="7_d6mph"]
 [ext_resource type="PackedScene" uid="uid://cbg8y8fvx44nl" path="res://scene/penguboss.tscn" id="8_jqyms"]
 [ext_resource type="PackedScene" uid="uid://kppx8kgl57ia" path="res://scene/chest.tscn" id="9_d1120"]
+[ext_resource type="PackedScene" uid="uid://d22wgqnjpgta6" path="res://lightningpickup.tscn" id="11_swxl8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wnhx0"]
 atlas = ExtResource("5_rcsi2")
@@ -169,8 +170,8 @@ autostart = true
 [node name="Node2D" parent="." instance=ExtResource("9_d1120")]
 position = Vector2(808, 464)
 
-[node name="penguboss" parent="." instance=ExtResource("8_jqyms")]
-position = Vector2(-480, 520)
+[node name="Node2D2" parent="." instance=ExtResource("11_swxl8")]
+position = Vector2(416, 464)
 
 [connection signal="timeout" from="mmobtimer" to="." method="_on_mmobtimer_timeout"]
 [connection signal="timeout" from="orcmobtimer" to="." method="_on_orcmobtimer_timeout"]

@@ -100,7 +100,6 @@ func _attack_loop1() -> void:
 func _attack_loop2() -> void:
 	while true:
 		await get_tree().process_frame
-		print("Checking long attack: ", inshortAttackZone, attacking, dieing, jumping)
 		if inlongAttackZone and not attacking and not dieing and not inshortAttackZone and not jumping:
 			attacking = true
 			$AnimatedSprite2D.play("attacklong")
