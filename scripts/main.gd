@@ -6,6 +6,7 @@ extends Node2D
 @export var spawn_radius: float = 900.0
 @export var mobs_per_spawn: int = 1
 @export var mmobs_per_spawn: int = 0
+var x = 0
 var level = null
 
 @onready var player = get_node("player") # Change path to your actual player node
@@ -21,7 +22,8 @@ func spawn_mobs():
 	
 	for i in range(mobs_per_spawn):
 		var mob = mob_scene.instantiate()
-		
+		x += 1
+		print("spawned ", x)
 		# Generate a random angle and distance from the player
 		var angle = randf() * TAU
 		var distance = randf_range(spawn_radius * 1, spawn_radius)
@@ -36,7 +38,8 @@ func spawn_mmobs():
 
 	for i in range(mmobs_per_spawn):
 		var mob = mushroom_scene.instantiate()
-		
+		x += 1
+		print("spawned ", x)
 		# Generate a random angle and distance from the player
 		var angle = randf() * TAU
 		var distance = randf_range(spawn_radius * 0.5, spawn_radius)
@@ -51,7 +54,8 @@ func spawn_boss():
 
 	for i in range(1):
 		var mob = boss_scene.instantiate()
-		
+		x += 1
+		print("spawned ", x)
 		# Generate a random angle and distance from the player
 		var angle = randf() * TAU
 		var distance = randf_range(spawn_radius * 0.5, spawn_radius)

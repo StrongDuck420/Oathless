@@ -1,6 +1,8 @@
 extends Area2D
 
 var speed = 800
+var Damage = null
+
 
 func _ready():	
 	self.body_entered.connect(_on_Area2D_body_entered)
@@ -9,9 +11,12 @@ func _ready():
 func _physics_process(delta):
 	position += transform.x * speed * delta
 
+func set_damage(damage):
+	Damage = damage
+
 func _on_Area2D_body_entered(body):
 	if body.has_method("mobhit"):
-		body.mobhit()
+		body.mobhit(Damage)
 		$AnimatedSprite2D.play("boom")
 		await $AnimatedSprite2D.animation_finished
 		queue_free()  # Optional: destroy bullet on hit

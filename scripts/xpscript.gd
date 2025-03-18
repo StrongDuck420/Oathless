@@ -19,4 +19,5 @@ func _on_Area2D_body_entered(body):
 		
 func _on_collect_body_entered(body):
 	if body == player:
+		player.levelup()
 		queue_free()

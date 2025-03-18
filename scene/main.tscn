@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cmvyijux05kss"]
+[gd_scene load_steps=17 format=3 uid="uid://cmvyijux05kss"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_6rs0y"]
 [ext_resource type="PackedScene" uid="uid://cubrgd2gldmlu" path="res://scene/player.tscn" id="1_rvfi3"]
@@ -9,7 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://d7wrvfvuxdlt" path="res://scene/mushroommob.tscn" id="7_d6mph"]
 [ext_resource type="PackedScene" uid="uid://cbg8y8fvx44nl" path="res://scene/penguboss.tscn" id="8_jqyms"]
 [ext_resource type="PackedScene" uid="uid://kppx8kgl57ia" path="res://scene/chest.tscn" id="9_d1120"]
-[ext_resource type="PackedScene" uid="uid://d22wgqnjpgta6" path="res://lightningpickup.tscn" id="11_swxl8"]
+[ext_resource type="Texture2D" uid="uid://dkjpyho1l458v" path="res://textures/Lightning-Mage-Icons-32x32-Pixel-Art.jpg" id="9_voouo"]
+[ext_resource type="PackedScene" uid="uid://d22wgqnjpgta6" path="res://scene/lightningpickup.tscn" id="11_swxl8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wnhx0"]
 atlas = ExtResource("5_rcsi2")
@@ -128,6 +129,19 @@ position = Vector2(296, 64)
 scale = Vector2(6, 6)
 texture = SubResource("AtlasTexture_ggrp4")
 
+[node name="lightning" type="TextureRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -104.0
+offset_right = 674.0
+offset_bottom = 563.0
+grow_vertical = 0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("9_voouo")
+
 [node name="killsskull" type="TextureRect" parent="CanvasLayer"]
 anchors_preset = 1
 anchor_left = 1.0
@@ -157,6 +171,26 @@ layout_mode = 2
 [node name="kills" type="Label" parent="CanvasLayer/level/VBoxContainer"]
 layout_mode = 2
 text = "Level 1"
+horizontal_alignment = 1
+
+[node name="cooldown" type="MarginContainer" parent="CanvasLayer"]
+top_level = true
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -158.0
+offset_right = 48.0
+offset_bottom = -118.0
+grow_vertical = 0
+scale = Vector2(2.5, 2.5)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/cooldown"]
+layout_mode = 2
+
+[node name="timer" type="Label" parent="CanvasLayer/cooldown/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "E"
 horizontal_alignment = 1
 
 [node name="mmobtimer" type="Timer" parent="."]

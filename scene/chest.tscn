@@ -1,8 +1,8 @@
 [gd_scene load_steps=16 format=3 uid="uid://kppx8kgl57ia"]
 
-[ext_resource type="Script" path="res://scene/chestscript.gd" id="1_grf7f"]
+[ext_resource type="Script" path="res://scripts/chestscript.gd" id="1_grf7f"]
 [ext_resource type="Texture2D" uid="uid://dnh8qxp08grku" path="res://textures/Chests.png" id="1_pvdit"]
-[ext_resource type="PackedScene" uid="uid://d22wgqnjpgta6" path="res://lightningpickup.tscn" id="2_f05ji"]
+[ext_resource type="PackedScene" uid="uid://d22wgqnjpgta6" path="res://scene/lightningpickup.tscn" id="2_f05ji"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gfd1f"]
 size = Vector2(128, 96)

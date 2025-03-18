@@ -18,7 +18,6 @@ func _ready():
 	_attack_loop()
 	
 func _physics_process(_delta):
-	z_index = int(global_position.y)
 	if not inAttackZone and not attacking and not dieing: 
 		#var direction = (player.global_position - global_position).normalized()
 		#global_position += direction * speed * _delta
@@ -35,6 +34,15 @@ func _physics_process(_delta):
 			$AnimatedSprite2D.flip_h = false
 		elif direction.x < 0:
 			$AnimatedSprite2D.flip_h = true
+	else:
+		push_force = lerp(push_force, Vector2.ZERO, 10 * _delta)
+		velocity = push_force
+		move_and_slide()
+		
+	var space = player.global_position.distance_to(global_position)
+	if space > 1000:
+		print("removed 1")
+		queue_free()
 
 func _attack_loop() -> void:
 	while true:
@@ -60,8 +68,8 @@ func _on_Area2D_body_exited(body):
 
 
 
-func mobhit():
-	mobhp -= 25
+func mobhit(Damage):
+	mobhp -= Damage
 	if mobhp > 0:
 		hitani = true
 		$AnimatedSprite2D.play("hit")

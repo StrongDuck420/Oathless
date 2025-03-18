@@ -6,7 +6,7 @@ var speed = 200
 var player = null
 var inAttackZone = false
 var attacking = false
-var mobhp = 160
+var mobhp = 200
 var dieing = false
 var hitani = false
 var push_force: Vector2 = Vector2.ZERO
@@ -18,7 +18,6 @@ func _ready():
 	_attack_loop()
 	
 func _physics_process(_delta):
-	z_index = int(global_position.y)
 	if not inAttackZone and not attacking and not dieing: 
 		#var direction = (player.global_position - global_position).normalized()
 		#global_position += direction * speed * _delta
@@ -59,8 +58,8 @@ func _on_Area2D_body_exited(body):
 
 
 
-func mobhit():
-	mobhp -= 20
+func mobhit(Damage):
+	mobhp -= Damage
 	if mobhp > 0:
 		hitani = true
 		$AnimatedSprite2D.play("damage")

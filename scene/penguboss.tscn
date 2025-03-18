@@ -1,8 +1,9 @@
-[gd_scene load_steps=63 format=3 uid="uid://cbg8y8fvx44nl"]
+[gd_scene load_steps=64 format=3 uid="uid://cbg8y8fvx44nl"]
 
 [ext_resource type="Texture2D" uid="uid://116igi3l05h4" path="res://textures/pengu_idle.png" id="1_0btv3"]
 [ext_resource type="Texture2D" uid="uid://cmwet84nkelg5" path="res://textures/pengu_attack_peck.png" id="1_6e8aj"]
 [ext_resource type="Script" path="res://scripts/pengubossscript.gd" id="1_7ta8w"]
+[ext_resource type="PackedScene" uid="uid://kppx8kgl57ia" path="res://scene/chest.tscn" id="2_gln22"]
 [ext_resource type="Texture2D" uid="uid://cac1jkj663uvv" path="res://textures/Impact Spritesheet.png" id="2_m2hqh"]
 [ext_resource type="Texture2D" uid="uid://c3iven3ujq7hm" path="res://textures/pengu_attack_ray.png" id="2_u7t83"]
 [ext_resource type="Texture2D" uid="uid://d1ke66r72mesp" path="res://textures/pengu_move.png" id="4_81hm2"]
@@ -406,6 +407,7 @@ radius = 204.002
 
 [node name="boss" type="CharacterBody2D" parent="."]
 script = ExtResource("1_7ta8w")
+chest_scene = ExtResource("2_gln22")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="boss"]
 position = Vector2(-8, -64)

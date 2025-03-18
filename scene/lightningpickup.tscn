@@ -1,25 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://d22wgqnjpgta6"]
 
-[ext_resource type="Texture2D" uid="uid://dkjpyho1l458v" path="res://textures/Lightning-Mage-Icons-32x32-Pixel-Art.jpg" id="1_0dcgg"]
-[ext_resource type="Script" path="res://lightningpickupcode.gd" id="1_tefyy"]
+[ext_resource type="Script" path="res://scripts/lightningpickupcode.gd" id="1_pm0ew"]
+[ext_resource type="Texture2D" uid="uid://dkjpyho1l458v" path="res://textures/Lightning-Mage-Icons-32x32-Pixel-Art.jpg" id="2_grle0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8p6nt"]
-radius = 88.0
-
-[sub_resource type="Animation" id="Animation_2g1nl"]
-resource_name = "float"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Area2D/Sprite2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, -8), Vector2(0, -7.62939e-06)]
-}
+radius = 56.0
 
 [sub_resource type="Animation" id="Animation_en8qv"]
 length = 0.001
@@ -36,6 +21,21 @@ tracks/0/keys = {
 "values": [Vector2(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_2g1nl"]
+resource_name = "float"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Area2D/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -8), Vector2(0, -7.62939e-06)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hk2xw"]
 _data = {
 "RESET": SubResource("Animation_en8qv"),
@@ -45,7 +45,7 @@ _data = {
 [node name="Node2D" type="Node2D"]
 
 [node name="Area2D" type="Area2D" parent="."]
-script = ExtResource("1_tefyy")
+script = ExtResource("1_pm0ew")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_8p6nt")
@@ -59,4 +59,4 @@ autoplay = "float"
 
 [node name="Sprite2D" type="Sprite2D" parent="Area2D"]
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_0dcgg")
+texture = ExtResource("2_grle0")

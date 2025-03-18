@@ -1,21 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://di3okeavhjoqb"]
+[gd_scene load_steps=9 format=3 uid="uid://di3okeavhjoqb"]
 
-[ext_resource type="Texture2D" uid="uid://b5dm2q18a314w" path="res://textures/Sprite-sheet.png" id="1_mhcju"]
+[ext_resource type="Script" path="res://scripts/lighteningscript.gd" id="1_kk877"]
+[ext_resource type="Texture2D" uid="uid://b5dm2q18a314w" path="res://textures/Sprite-sheet.png" id="2_tq40o"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gbr7p"]
-atlas = ExtResource("1_mhcju")
+atlas = ExtResource("2_tq40o")
 region = Rect2(0, 0, 256, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m5ek2"]
-atlas = ExtResource("1_mhcju")
+atlas = ExtResource("2_tq40o")
 region = Rect2(256, 0, 256, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cb7qx"]
-atlas = ExtResource("1_mhcju")
+atlas = ExtResource("2_tq40o")
 region = Rect2(512, 0, 256, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_01lkr"]
-atlas = ExtResource("1_mhcju")
+atlas = ExtResource("2_tq40o")
 region = Rect2(768, 0, 256, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sh03b"]
@@ -44,13 +45,15 @@ size = Vector2(224, 64)
 [node name="Node2D" type="Node2D"]
 
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2(320, -15)
+script = ExtResource("1_kk877")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_sh03b")
 animation = &"fire"
 autoplay = "fire"
-frame_progress = 0.705611
+frame_progress = 0.664781
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 scale = Vector2(3, 3)

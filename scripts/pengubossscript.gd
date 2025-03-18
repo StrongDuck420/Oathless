@@ -7,10 +7,11 @@ var player = null
 var inshortAttackZone = false
 var inlongAttackZone = false
 var attacking = false
-var mobhp = 160
+var mobhp = 500
 var dieing = false
 var direction = Vector2.ZERO
 var jumping = false
+@export var chest_scene: PackedScene
 @export var randomStrength: float = 30.0
 @export var shakeFade: float = 5.0
 var rng = RandomNumberGenerator.new()
@@ -31,7 +32,6 @@ func _ready():
 	_attack_loop2()
 
 func _physics_process(_delta):
-	z_index = int(global_position.y)
 	if not inshortAttackZone and not inlongAttackZone and not attacking and not dieing: 
 		direction = (player.global_position - global_position).normalized()
 		if not jumping:
@@ -129,8 +129,8 @@ func _on_Area2D_body_exiteds(body):
 
 
 
-func mobhit():
-	mobhp -= 10
+func mobhit(Damage):
+	mobhp -= Damage
 	if mobhp <= 0 and not dieing:
 		dieing = true
 		$AnimatedSprite2D.play("die")
@@ -138,7 +138,11 @@ func mobhit():
 		$CollisionShape2D.call_deferred("set_disabled", true)
 		var main = get_tree().current_scene
 		main.kill()
-		await get_tree().create_timer(2.60).timeout
+		await get_tree().create_timer(2).timeout
+		var chest = chest_scene.instantiate()
+		chest.global_position = global_position
+		var g = get_parent()
+		g.get_parent().add_child.call_deferred(chest)
 		var a = get_parent()
 		a.queue_free()
 
@@ -168,3 +172,12 @@ func apply_shake():
 
 func random0ffset() -> Vector2:
 	return Vector2(rng.randf_range(-shake_strength, shake_strength),rng.randf_range(-shake_strength, shake_strength))
+
+
+
+
+
+
+
+
+		
