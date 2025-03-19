@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://1cpbrlqoh6vl"
+path="res://.godot/imported/The Cube Rift Lightning Beam Loop Impact Distant (Fortnite Sound) - Sound Effect for editing (mp3cut.net).wav-8b31aa35a0d7fbc7fa966f1e0890bb99.sample"
+
+[deps]
+
+source_file="res://The Cube Rift Lightning Beam Loop Impact Distant (Fortnite Sound) - Sound Effect for editing (mp3cut.net).wav"
+dest_files=["res://.godot/imported/The Cube Rift Lightning Beam Loop Impact Distant (Fortnite Sound) - Sound Effect for editing (mp3cut.net).wav-8b31aa35a0d7fbc7fa966f1e0890bb99.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -19,6 +19,7 @@ func _ready() -> void:
 	player_camera = player.get_node("Camera2D")
 	timeleft()
 	damage_loop() 
+	
 
 func _process(_delta):
 	var direction = get_global_mouse_position() - laser_root.global_position
@@ -56,9 +57,6 @@ func damage_loop():
 				else:
 					mobs.erase(mob)
 		await get_tree().create_timer(0.1).timeout
-
-
-
 
 
 

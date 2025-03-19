@@ -52,6 +52,7 @@ func _physics_process(_delta):
 
 func shoot():
 	if not shootdelay:
+		$firefire.play()
 		shootdelay = true
 		var p = projectile.instantiate()
 		owner.add_child(p)
@@ -73,6 +74,7 @@ func laser():
 	if lightningpicked:
 		if not lightcountdownnnnn:
 			if not cooldown:
+				$fire.play()
 				cooldown = true
 				var l = lightning_scene.instantiate()
 				add_child(l)
@@ -82,6 +84,7 @@ func laser():
 				await get_tree().create_timer(5).timeout
 				lightcountdown()
 				cooldown = false 
+				$fire.stop()
 
 func hit():
 	if current_heart_index < heart_images.size():
@@ -100,6 +103,9 @@ func hit():
 			lastheart.visible = false
 			$levelup.visible = false
 			$finallevel.visible = false
+			set_physics_process(false)
+			await get_tree().create_timer(3).timeout
+			get_tree().change_scene_to_file("res://scene/startmenu.tscn")
 		
 
 func pickedlightning():

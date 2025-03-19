@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cmvyijux05kss"]
+[gd_scene load_steps=18 format=3 uid="uid://cmvyijux05kss"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_6rs0y"]
 [ext_resource type="PackedScene" uid="uid://cubrgd2gldmlu" path="res://scene/player.tscn" id="1_rvfi3"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://kppx8kgl57ia" path="res://scene/chest.tscn" id="9_d1120"]
 [ext_resource type="Texture2D" uid="uid://dkjpyho1l458v" path="res://textures/Lightning-Mage-Icons-32x32-Pixel-Art.jpg" id="9_voouo"]
 [ext_resource type="PackedScene" uid="uid://d22wgqnjpgta6" path="res://scene/lightningpickup.tscn" id="11_swxl8"]
+[ext_resource type="AudioStream" uid="uid://b4vl0axgss2t3" path="res://sounds/Average Plate Gaem OST - Sudden Death5.0 Difficulty (1).mp3" id="12_t0ifo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wnhx0"]
 atlas = ExtResource("5_rcsi2")
@@ -206,6 +207,12 @@ position = Vector2(808, 464)
 
 [node name="Node2D2" parent="." instance=ExtResource("11_swxl8")]
 position = Vector2(416, 464)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_t0ifo")
+volume_db = -10.0
+autoplay = true
+parameters/looping = true
 
 [connection signal="timeout" from="mmobtimer" to="." method="_on_mmobtimer_timeout"]
 [connection signal="timeout" from="orcmobtimer" to="." method="_on_orcmobtimer_timeout"]

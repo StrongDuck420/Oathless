@@ -18,18 +18,13 @@ func _ready():
 	_attack_loop()
 	
 func _physics_process(_delta):
-	if not inAttackZone and not attacking and not dieing: 
-		#var direction = (player.global_position - global_position).normalized()
-		#global_position += direction * speed * _delta
+	if not inAttackZone and not attacking and not dieing and is_instance_valid(player): 
 		var direction = (player.global_position - global_position).normalized()
-		#velocity = direction * speed
 		velocity = direction * speed + push_force
 		move_and_slide()
-		push_force = lerp(push_force, Vector2.ZERO, 10 * _delta)  # smooth decay
+		push_force = lerp(push_force, Vector2.ZERO, 10 * _delta)
 		if not hitani:
-			#$AnimatedSprite2D.animation = "run"
 			$AnimatedSprite2D.play("run")
-# Flip sprite based on direction
 		if direction.x > 0:
 			$AnimatedSprite2D.flip_h = false
 		elif direction.x < 0:
@@ -39,10 +34,11 @@ func _physics_process(_delta):
 		velocity = push_force
 		move_and_slide()
 		
-	var space = player.global_position.distance_to(global_position)
-	if space > 1000:
-		print("removed 1")
-		queue_free()
+	if is_instance_valid(player): #fixes werif bug that makes the game crash
+		var space = player.global_position.distance_to(global_position)
+		if space > 1000:
+			print("removed 1")
+			queue_free()
 
 func _attack_loop() -> void:
 	while true:

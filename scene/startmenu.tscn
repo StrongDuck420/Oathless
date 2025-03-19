@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://de0l6gshsdsks"]
+
+[ext_resource type="Script" path="res://scripts/menuscript.gd" id="1_ep5ol"]
+[ext_resource type="Texture2D" uid="uid://o6q02en6aiib" path="res://textures/background.png" id="1_vu2n2"]
+[ext_resource type="Script" path="res://scripts/dall·e_2025_03_1117_02_55_pixel_art_style_title_screen_for_a_dark_fantasy_game_called'oathless'_the_title'oathless'is_written_in_a_mysterious,arcane_glowing_script_with_ma.gd" id="2_5urjn"]
+[ext_resource type="AudioStream" uid="uid://cvldmivw1jsm4" path="res://sounds/The Binding of Isaac_ Repentance OST - Title Theme 10 Minutes.mp3" id="4_15kom"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ep5ol")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+top_level = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -124.0
+offset_top = 55.0
+offset_right = -28.0
+offset_bottom = 95.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.5, 2.5)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Start Game"
+
+[node name="Dall·e2025-03-1117_02_55-PixelArtStyleTitleScreenForADarkFantasyGameCalled\'oathless\'_TheTitle\'oathless\'IsWrittenInAMysterious,ArcaneGlowingScriptWithMa" type="Sprite2D" parent="."]
+position = Vector2(1507, -54)
+texture = ExtResource("1_vu2n2")
+script = ExtResource("2_5urjn")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_15kom")
+autoplay = true
+parameters/looping = true
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

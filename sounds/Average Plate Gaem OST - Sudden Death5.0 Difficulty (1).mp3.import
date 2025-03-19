@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b4vl0axgss2t3"
+path="res://.godot/imported/Average Plate Gaem OST - Sudden Death5.0 Difficulty (1).mp3-ba4ac3aea293427fd37705f2029ba2b7.mp3str"
+
+[deps]
+
+source_file="res://sounds/Average Plate Gaem OST - Sudden Death5.0 Difficulty (1).mp3"
+dest_files=["res://.godot/imported/Average Plate Gaem OST - Sudden Death5.0 Difficulty (1).mp3-ba4ac3aea293427fd37705f2029ba2b7.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

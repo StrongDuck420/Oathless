@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cawgxpu7gt2um"]
+[gd_scene load_steps=19 format=3 uid="uid://cawgxpu7gt2um"]
 
 [ext_resource type="Script" path="res://scripts/fireballscript.gd" id="1_1ecuc"]
 [ext_resource type="Texture2D" uid="uid://b8awc4h7828dy" path="res://textures/Sprites.png" id="2_cjlcq"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://mwjfij12gwo6" path="res://textures/Firebolt SpriteSheet - Kopi - Kopi (2).png" id="3_tv2mp"]
 [ext_resource type="Texture2D" uid="uid://nmyesjajvytt" path="res://textures/Firebolt SpriteSheet - Kopi - Kopi (3).png" id="4_ou6r2"]
 [ext_resource type="Texture2D" uid="uid://bm4kkkhqektt0" path="res://textures/Firebolt SpriteSheet - Kopi - Kopi (4).png" id="5_qrok6"]
+[ext_resource type="AudioStream" uid="uid://cquvp1w0olmqg" path="res://sounds/EM_FIRE_HOLD_4s.wav" id="8_2inhn"]
+[ext_resource type="AudioStream" uid="uid://b2lrwjae58uhd" path="res://sounds/EM_FIRE_IMPACT_01.wav" id="9_8p43m"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_21ew6"]
 radius = 6.0
@@ -110,5 +112,14 @@ frame = 7
 frame_progress = 1.0
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="flyingfire" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_2inhn")
+volume_db = 7.0
+autoplay = true
+
+[node name="fireimpact" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_8p43m")
+volume_db = 3.0
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
