@@ -12,13 +12,14 @@ var hitani = false
 var push_force: Vector2 = Vector2.ZERO
 
 func _ready():
+	add_to_group("mebs")
 	player = get_node("/root/Node2D/player") 
 	$Area2D.body_entered.connect(_on_Area2D_body_entered)
 	$Area2D.body_exited.connect(_on_Area2D_body_exited)
 	_attack_loop()
 	
 func _physics_process(_delta):
-	if not inAttackZone and not attacking and not dieing: 
+	if not inAttackZone and not attacking and not dieing and is_instance_valid(player): 
 		#var direction = (player.global_position - global_position).normalized()
 		#global_position += direction * speed * _delta
 		var direction = (player.global_position - global_position).normalized()
@@ -42,7 +43,8 @@ func _attack_loop() -> void:
 			await get_tree().create_timer(0.10).timeout
 			if inAttackZone and player:  # optional check
 				await get_tree().create_timer(0.30).timeout
-				player.hit()
+				if is_instance_valid(player):
+					player.hit()
 			await get_tree().create_timer(0.32).timeout
 			attacking = false
 		else:

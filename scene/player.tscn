@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://di3okeavhjoqb" path="res://scene/lightning.tscn" id="3_i6egg"]
 [ext_resource type="Texture2D" uid="uid://b517ban2u4hbs" path="res://textures/1_100x100px.png" id="4_2xke8"]
 [ext_resource type="Texture2D" uid="uid://dpxdys05in3gu" path="res://textures/Fire Effect and Bullet 16x16.png" id="4_q02w7"]
-[ext_resource type="AudioStream" uid="uid://1cpbrlqoh6vl" path="res://The Cube Rift Lightning Beam Loop Impact Distant (Fortnite Sound) - Sound Effect for editing (mp3cut.net).wav" id="7_35lpb"]
+[ext_resource type="AudioStream" uid="uid://1cpbrlqoh6vl" path="res://sounds/The Cube Rift Lightning Beam Loop Impact Distant (Fortnite Sound) - Sound Effect for editing (mp3cut.net).wav" id="7_35lpb"]
 [ext_resource type="AudioStream" uid="uid://c7p082gegavya" path="res://sounds/EM_FIRE_CAST_01.wav" id="8_cg2il"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ts1wt"]

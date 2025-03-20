@@ -10,11 +10,17 @@ var x = 0
 var level = null
 
 @onready var player = get_node("player") # Change path to your actual player node
+var mebs = null
+
 
 func _ready():
+	mebs = get_tree().get_nodes_in_group("mebs")
+	for meb in mebs:
+		meb.queue_free()
 	spawn_mobs() # Initial spawn
 	level = get_node("/root/Node2D/CanvasLayer/level/VBoxContainer/kills")
 	progression()
+	
 
 func spawn_mobs():
 	if player == null:
@@ -30,7 +36,7 @@ func spawn_mobs():
 		var offset = Vector2(cos(angle), sin(angle)) * distance
 		mob.global_position = player.global_position + offset
 
-		get_parent().add_child.call_deferred(mob)
+		get_parent().add_child.call_deferred(mob) #get_parent().add_child.call_deferred(mob) self
 		
 func spawn_mmobs():
 	if player == null:

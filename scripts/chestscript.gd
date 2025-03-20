@@ -8,6 +8,7 @@ func _ready() -> void:
 	self.body_entered.connect(_on_Area2D_body_entereds)
 	$AnimatedSprite2D.play("idle")
 	player = get_node("/root/Node2D/player") 
+	add_to_group("chests")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -16,6 +17,7 @@ func _process(_delta):
 func _on_Area2D_body_entereds(body):
 	if not open:
 		if body == player:
+			$AudioStreamPlayer2D.play()
 			$AnimatedSprite2D.play("open")
 			await get_tree().create_timer(0.5).timeout
 			open = true

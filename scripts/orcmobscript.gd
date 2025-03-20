@@ -12,6 +12,7 @@ var hitani = false
 var push_force: Vector2 = Vector2.ZERO
 
 func _ready():
+	add_to_group("mebs")
 	player = get_node("/root/Node2D/player") 
 	$Area2D.body_entered.connect(_on_Area2D_body_entered)
 	$Area2D.body_exited.connect(_on_Area2D_body_exited)

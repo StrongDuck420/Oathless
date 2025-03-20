@@ -20,6 +20,7 @@ var player_camera = null
 var nearby_enemies: Array = [] ######################
 
 func _ready():
+	add_to_group("mebs")
 	player = get_node("/root/Node2D/player") 
 	player_camera = player.get_node("Camera2D")
 	$longattack.body_entered.connect(_on_Area2D_body_entereds)
@@ -32,7 +33,7 @@ func _ready():
 	_attack_loop2()
 
 func _physics_process(_delta):
-	if not inshortAttackZone and not inlongAttackZone and not attacking and not dieing: 
+	if not inshortAttackZone and not inlongAttackZone and not attacking and not dieing and is_instance_valid(player): 
 		direction = (player.global_position - global_position).normalized()
 		if not jumping:
 			jump()
@@ -45,7 +46,7 @@ func _physics_process(_delta):
 			$AnimatedSprite2D.flip_h = false
 		elif direction.x < 0:
 			$AnimatedSprite2D.flip_h = true
-	if shake_strength > 0:
+	if shake_strength > 0 and is_instance_valid(player):
 		shake_strength = lerpf(shake_strength, 0, shakeFade * _delta)
 		
 		player_camera.offset = random0ffset()
@@ -139,10 +140,13 @@ func mobhit(Damage):
 		var main = get_tree().current_scene
 		main.kill()
 		await get_tree().create_timer(2).timeout
-		var chest = chest_scene.instantiate()
-		chest.global_position = global_position
-		var g = get_parent()
-		g.get_parent().add_child.call_deferred(chest)
+		var existing_chest = get_tree().get_nodes_in_group("chests")  # Assuming chests are in a "chests" group
+		if existing_chest.size() == 0 and chest_scene:  # No chest exists and chest_scene is assigned
+			var chest = chest_scene.instantiate()
+			chest.global_position = global_position
+			var g = get_parent()
+			g.get_parent().add_child.call_deferred(chest)
+		
 		var a = get_parent()
 		a.queue_free()
 
