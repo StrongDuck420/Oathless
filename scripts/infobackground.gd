@@ -1,5 +1,5 @@
 extends Sprite2D
-#mmenu backgorund script
+#infoScreen background script
 func _ready():
 	get_viewport().connect("size_changed", _on_viewport_size_changed)
 	adjust_to_screen()
@@ -9,7 +9,9 @@ func _on_viewport_size_changed():
 
 func adjust_to_screen():
 	var screen_size = get_viewport_rect().size
+	
 	var texture_size = texture.get_size()
+	
 	var scale_x = screen_size.x / texture_size.x
 	var scale_y = screen_size.y / texture_size.y
 	

@@ -1,5 +1,5 @@
 extends Node2D
-
+#main sciprt
 @export var mob_scene: PackedScene
 @export var mushroom_scene: PackedScene
 @export var boss_scene: PackedScene
@@ -9,7 +9,7 @@ extends Node2D
 var x = 0
 var level = null
 
-@onready var player = get_node("player") # Change path to your actual player node
+@onready var player = get_node("player") 
 var mebs = null
 
 
@@ -17,7 +17,7 @@ func _ready():
 	mebs = get_tree().get_nodes_in_group("mebs")
 	for meb in mebs:
 		meb.queue_free()
-	spawn_mobs() # Initial spawn
+	spawn_mobs() 
 	level = get_node("/root/Node2D/CanvasLayer/level/VBoxContainer/kills")
 	progression()
 	
@@ -30,13 +30,13 @@ func spawn_mobs():
 		var mob = mob_scene.instantiate()
 		x += 1
 		print("spawned ", x)
-		# Generate a random angle and distance from the player
+
 		var angle = randf() * TAU
 		var distance = randf_range(spawn_radius * 1, spawn_radius)
 		var offset = Vector2(cos(angle), sin(angle)) * distance
 		mob.global_position = player.global_position + offset
 
-		get_parent().add_child.call_deferred(mob) #get_parent().add_child.call_deferred(mob) self
+		get_parent().add_child.call_deferred(mob) 
 		
 func spawn_mmobs():
 	if player == null:
@@ -46,7 +46,7 @@ func spawn_mmobs():
 		var mob = mushroom_scene.instantiate()
 		x += 1
 		print("spawned ", x)
-		# Generate a random angle and distance from the player
+		
 		var angle = randf() * TAU
 		var distance = randf_range(spawn_radius * 0.5, spawn_radius)
 		var offset = Vector2(cos(angle), sin(angle)) * distance
@@ -62,7 +62,7 @@ func spawn_boss():
 		var mob = boss_scene.instantiate()
 		x += 1
 		print("spawned ", x)
-		# Generate a random angle and distance from the player
+
 		var angle = randf() * TAU
 		var distance = randf_range(spawn_radius * 0.5, spawn_radius)
 		var offset = Vector2(cos(angle), sin(angle)) * distance
@@ -70,14 +70,14 @@ func spawn_boss():
 
 		get_parent().add_child.call_deferred(mob)
 		
-		
+var ggs = 0		
 func kill():
+	var DeathscreenText1 = get_node("/root/Node2D/CanvasLayer/DeathScreen1/VBoxContainer/Score")
 	var kills = get_node("/root/Node2D/CanvasLayer/MarginContainer/VBoxContainer/kills")
 	kills.text = str(int(kills.text) + 1)
-	
-	
-	
-
+	ggs = ggs + 1
+	DeathscreenText1.text = "Score: " + str(ggs)
+	print("lol")
 
 func progression():
 	var infinity = false
@@ -107,15 +107,19 @@ func progression():
 	infinity = true
 	while infinity == true:
 		await get_tree().create_timer(10).timeout
-		$orcmobtimer.wait_time *= 0.9  # 10% decrease
+		$orcmobtimer.wait_time *= 0.9 
 		$mmobtimer.wait_time *= 0.9
 		if randf() < 0.20:
 			spawn_boss()
-
-
-
 
 func _on_mmobtimer_timeout() -> void:
 	spawn_mmobs()
 func _on_orcmobtimer_timeout() -> void:
 	spawn_mobs()
+	
+func set_score():
+	var d = get_node("/root/Node2D/CanvasLayer/MarginContainer/VBoxContainer/kills")
+	var n = int(d.text)
+	if n > Global.save_data.high_score:
+		Global.save_data.high_score = n
+		Global.save_data.save()

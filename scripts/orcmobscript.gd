@@ -21,9 +21,9 @@ func _ready():
 func _physics_process(_delta):
 	if not inAttackZone and not attacking and not dieing and is_instance_valid(player): 
 		var direction = (player.global_position - global_position).normalized()
+		push_force = lerp(push_force, Vector2.ZERO, 10 * _delta)
 		velocity = direction * speed + push_force
 		move_and_slide()
-		push_force = lerp(push_force, Vector2.ZERO, 10 * _delta)
 		if not hitani:
 			$AnimatedSprite2D.play("run")
 		if direction.x > 0:
@@ -48,7 +48,7 @@ func _attack_loop() -> void:
 			attacking = true
 			$AnimatedSprite2D.play("attack")
 			await get_tree().create_timer(0.42).timeout
-			if inAttackZone and player:  # optional check
+			if inAttackZone and player: 
 				player.hit()
 			await get_tree().create_timer(0.30).timeout
 			attacking = false
@@ -83,17 +83,11 @@ func mobhit(Damage):
 		var a = get_parent()
 		a.queue_free()
 
-
 func spawn_xp():
 	var xp = xp_scene.instantiate()
 	xp.global_position = global_position
 	get_tree().current_scene.call_deferred("add_child", xp)
-	
-	
-	
-	
-	
-	
+
 	
 func apply_push_force(force: Vector2):
 	push_force += force

@@ -1,5 +1,5 @@
 extends Area2D
-
+#det her er mit XP script
 var player = null
 var entered = false
 

@@ -1,18 +1,19 @@
-[gd_scene load_steps=19 format=3 uid="uid://cmvyijux05kss"]
+[gd_scene load_steps=20 format=3 uid="uid://cmvyijux05kss"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_6rs0y"]
 [ext_resource type="PackedScene" uid="uid://cubrgd2gldmlu" path="res://scene/player.tscn" id="1_rvfi3"]
-[ext_resource type="Texture2D" uid="uid://dkiw0v1kp0u5b" path="res://textures/icon.svg" id="2_dwxpy"]
 [ext_resource type="PackedScene" uid="uid://ciuryqbhq6oqk" path="res://scene/background.tscn" id="3_m5u3t"]
 [ext_resource type="PackedScene" uid="uid://bwn3w46v2727p" path="res://scene/orcmob.tscn" id="4_wb5ar"]
 [ext_resource type="Texture2D" uid="uid://beft6x5kngd2n" path="res://textures/FreeHorrorUi.png" id="5_rcsi2"]
 [ext_resource type="PackedScene" uid="uid://d7wrvfvuxdlt" path="res://scene/mushroommob.tscn" id="7_d6mph"]
 [ext_resource type="PackedScene" uid="uid://cbg8y8fvx44nl" path="res://scene/penguboss.tscn" id="8_jqyms"]
-[ext_resource type="Texture2D" uid="uid://btn027chpe4d0" path="res://shadowpic.png" id="8_ylg4n"]
-[ext_resource type="Script" path="res://scene/shadowscript.gd" id="9_7nsvl"]
+[ext_resource type="Texture2D" uid="uid://btn027chpe4d0" path="res://textures/shadowpic.png" id="8_ylg4n"]
+[ext_resource type="Script" path="res://scripts/shadowscript.gd" id="9_7nsvl"]
 [ext_resource type="Texture2D" uid="uid://dkjpyho1l458v" path="res://textures/Lightning-Mage-Icons-32x32-Pixel-Art.jpg" id="9_voouo"]
-[ext_resource type="PackedScene" uid="uid://d22wgqnjpgta6" path="res://scene/lightningpickup.tscn" id="11_swxl8"]
+[ext_resource type="Texture2D" uid="uid://cipc3bqca1ndy" path="res://textures/25394.png" id="12_71mtd"]
 [ext_resource type="AudioStream" uid="uid://b4vl0axgss2t3" path="res://sounds/Average Plate Gaem OST - Sudden Death5.0 Difficulty (1).mp3" id="12_t0ifo"]
+[ext_resource type="Script" path="res://scripts/DeathScreen.gd" id="13_c5705"]
+[ext_resource type="PackedScene" uid="uid://kppx8kgl57ia" path="res://scene/chest.tscn" id="14_xq4x2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wnhx0"]
 atlas = ExtResource("5_rcsi2")
@@ -40,11 +41,6 @@ mob_scene = ExtResource("4_wb5ar")
 mushroom_scene = ExtResource("7_d6mph")
 boss_scene = ExtResource("8_jqyms")
 
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(1907, 973)
-scale = Vector2(11.2656, 21.5313)
-texture = ExtResource("2_dwxpy")
-
 [node name="ParallaxBackground" parent="." instance=ExtResource("3_m5u3t")]
 position = Vector2(3566, -654)
 
@@ -54,6 +50,7 @@ position = Vector2(984, 432)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Shadow" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(-88, -16)
 texture = ExtResource("8_ylg4n")
 script = ExtResource("9_7nsvl")
 
@@ -199,6 +196,60 @@ layout_mode = 2
 text = "E"
 horizontal_alignment = 1
 
+[node name="DeathScreen" type="Sprite2D" parent="CanvasLayer"]
+visible = false
+position = Vector2(24, 488)
+texture = ExtResource("12_71mtd")
+script = ExtResource("13_c5705")
+
+[node name="DeathScreen1" type="MarginContainer" parent="CanvasLayer"]
+visible = false
+top_level = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = 12.0
+offset_right = -66.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.5, 2.5)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/DeathScreen1"]
+layout_mode = 2
+
+[node name="Score" type="Label" parent="CanvasLayer/DeathScreen1/VBoxContainer"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="DeathScreen2" type="MarginContainer" parent="CanvasLayer"]
+visible = false
+top_level = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -188.0
+offset_right = -91.0
+offset_bottom = -148.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(5, 5)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/DeathScreen2"]
+layout_mode = 2
+
+[node name="DEAD" type="Label" parent="CanvasLayer/DeathScreen2/VBoxContainer"]
+layout_mode = 2
+text = "You Died"
+horizontal_alignment = 1
+
 [node name="mmobtimer" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
@@ -207,14 +258,14 @@ autostart = true
 wait_time = 3.0
 autostart = true
 
-[node name="Node2D2" parent="." instance=ExtResource("11_swxl8")]
-position = Vector2(1256, -320)
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_t0ifo")
 volume_db = -10.0
 autoplay = true
 parameters/looping = true
+
+[node name="Node2D" parent="." instance=ExtResource("14_xq4x2")]
+position = Vector2(1008, -800)
 
 [connection signal="timeout" from="mmobtimer" to="." method="_on_mmobtimer_timeout"]
 [connection signal="timeout" from="orcmobtimer" to="." method="_on_orcmobtimer_timeout"]

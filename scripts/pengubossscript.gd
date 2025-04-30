@@ -54,14 +54,9 @@ func _physics_process(_delta):
 	for enemy in nearby_enemies:
 		if enemy and enemy != self:
 			var push_dir = (enemy.global_position - global_position).normalized()
-			if enemy.has_method("apply_push_force"):  # safer
-				enemy.apply_push_force(push_dir * 100)  # You can tweak force here
+			if enemy.has_method("apply_push_force"):  
+				enemy.apply_push_force(push_dir * 100)  
 
-	
-	
-	
-	
-	
 func jump():
 	jumping = true
 	$longattack/CollisionShape2D.disabled = true
@@ -91,7 +86,7 @@ func _attack_loop1() -> void:
 			attacking = true
 			$AnimatedSprite2D.play("attackclose")
 			await get_tree().create_timer(0.50).timeout
-			if inshortAttackZone and player:  # optional check
+			if inshortAttackZone and player:  
 				player.hit()
 			await get_tree().create_timer(0.82).timeout
 			attacking = false
@@ -105,7 +100,7 @@ func _attack_loop2() -> void:
 			attacking = true
 			$AnimatedSprite2D.play("attacklong")
 			await get_tree().create_timer(0.65).timeout
-			if inlongAttackZone and player:  # optional check
+			if inlongAttackZone and player: 
 				player.hit()
 			await get_tree().create_timer(0.47).timeout
 			attacking = false
@@ -140,8 +135,8 @@ func mobhit(Damage):
 		var main = get_tree().current_scene
 		main.kill()
 		await get_tree().create_timer(2).timeout
-		var existing_chest = get_tree().get_nodes_in_group("chests")  # Assuming chests are in a "chests" group
-		if existing_chest.size() == 0 and chest_scene:  # No chest exists and chest_scene is assigned
+		var existing_chest = get_tree().get_nodes_in_group("chests")  
+		if existing_chest.size() == 0 and chest_scene:  
 			var chest = chest_scene.instantiate()
 			chest.global_position = global_position
 			var g = get_parent()
@@ -158,7 +153,7 @@ func mobhit(Damage):
 	
 	
 func _on_push_area_body_entered(body):
-	# Only push other enemies (exclude player or self)
+	#kun push enemies 
 	if body != self and body is CharacterBody2D:
 		nearby_enemies.append(body)
 

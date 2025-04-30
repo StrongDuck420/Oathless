@@ -1,5 +1,5 @@
 extends CharacterBody2D
-#this is mob scriptet
+#this is mob scriptet nr 2
 @export var xp_scene: PackedScene
 
 var speed = 200
@@ -25,10 +25,10 @@ func _physics_process(_delta):
 		var direction = (player.global_position - global_position).normalized()
 		velocity = direction * speed + push_force
 		move_and_slide()
-		push_force = lerp(push_force, Vector2.ZERO, 10 * _delta)  # smooth decay
+		push_force = lerp(push_force, Vector2.ZERO, 10 * _delta)  #smooth effekt
 		if not hitani:
 			$AnimatedSprite2D.play("run")
-# Flip sprite based on direction
+
 		if direction.x > 0:
 			$AnimatedSprite2D.flip_h = true
 		elif direction.x < 0:
@@ -41,7 +41,7 @@ func _attack_loop() -> void:
 			attacking = true
 			$AnimatedSprite2D.play("attack")
 			await get_tree().create_timer(0.10).timeout
-			if inAttackZone and player:  # optional check
+			if inAttackZone and player:  
 				await get_tree().create_timer(0.30).timeout
 				if is_instance_valid(player):
 					player.hit()

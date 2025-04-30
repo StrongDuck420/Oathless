@@ -24,6 +24,8 @@ func _ready():
 	heart_images.append(main_scene.get_node("CanvasLayer/heart 1"))
 	
 func get_input():
+	if Input.is_action_just_pressed("showcase"):
+		get_tree().change_scene_to_file("res://scene/showcase.tscn")
 	if not dead:
 		var input_direction = Input.get_vector("left", "right", "up", "down")
 		velocity = input_direction * speed
@@ -40,10 +42,10 @@ func get_input():
 	else:
 		velocity = Vector2.ZERO
 
-#process your moving i guess
+#process my moving i guess
 func _physics_process(_delta):
-	get_input()
 	move_and_slide()
+	get_input()
 	if not dead:
 		if velocity.length() > 0:
 			$hooded.play("running")
@@ -61,10 +63,8 @@ func shoot():
 		p.global_position = start_pos
 		var mouse_pos = get_global_mouse_position()
 
-		# Calculate direction towards mouse position
+		#calculate direktion towards mouse position
 		var direction = (mouse_pos - start_pos).normalized()
-		# Set the velocity of the projectile
-		# Set direction in the projectile
 		p.rotation = direction.angle()
 		p.set_damage(damage)
 		await get_tree().create_timer(0.2).timeout
@@ -104,7 +104,15 @@ func hit():
 			$levelup.visible = false
 			$finallevel.visible = false
 			set_physics_process(false)
+			await get_tree().create_timer(0.5).timeout
+			var DeathscreenText1 = main_scene.get_node("CanvasLayer/DeathScreen1")
+			var DeathscreenText2 = main_scene.get_node("CanvasLayer/DeathScreen2")
+			var DeathscreenBackground = main_scene.get_node("CanvasLayer/DeathScreen")
+			DeathscreenText1.visible = true
+			DeathscreenText2.visible = true
+			DeathscreenBackground.visible = true
 			await get_tree().create_timer(3).timeout
+			main_scene.set_score()
 			get_tree().change_scene_to_file("res://scene/startmenu.tscn")
 		
 

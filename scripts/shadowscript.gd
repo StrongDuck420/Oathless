@@ -1,4 +1,5 @@
 extends Sprite2D
+#my shadow effect sciprt 
 func _ready():
 	get_viewport().connect("size_changed", _on_viewport_size_changed)
 	adjust_to_screen()

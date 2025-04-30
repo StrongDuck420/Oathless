@@ -1,0 +1,76 @@
+[gd_scene load_steps=4 format=3 uid="uid://pu5vhrn8axv0"]
+
+[ext_resource type="Texture2D" uid="uid://f4wn3lgq3ybr" path="res://textures/diego-lopez-groundtiles.jpg" id="1_bykwd"]
+[ext_resource type="Script" path="res://scripts/infoscreenscript.gd" id="1_xfw6v"]
+[ext_resource type="Script" path="res://scripts/infobackground.gd" id="2_pdc80"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xfw6v")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+top_level = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -561.0
+offset_top = -325.0
+offset_right = -141.0
+offset_bottom = -57.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.66, 2.5)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+text = "Oathless is a game inspired by Vampire survierer with the only purpose of surviving as long as possible. 
+
+(W A S D)  to move
+(left click) to shoot
+(E) to use ability
+
+_TIPS_
+xp orbs increses damage
+First boss killed drops a chest"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Diego-lopez-groundtiles" type="Sprite2D" parent="."]
+position = Vector2(524, 465)
+texture = ExtResource("1_bykwd")
+script = ExtResource("2_pdc80")
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+top_level = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -255.0
+offset_top = -94.0
+offset_right = -159.0
+offset_bottom = -28.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(2.5, 2.5)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2"]
+layout_mode = 2
+
+[node name="Button2" type="Button" parent="MarginContainer2/VBoxContainer"]
+layout_mode = 2
+text = "Back"

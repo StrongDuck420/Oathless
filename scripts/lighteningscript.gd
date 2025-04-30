@@ -1,5 +1,5 @@
 extends Area2D
-
+#the ligthning ability 
 @export var randomStrength: float = 3.0
 @export var shakeFade: float = 5.0
 var rng = RandomNumberGenerator.new()

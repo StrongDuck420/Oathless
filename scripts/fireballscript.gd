@@ -1,5 +1,5 @@
 extends Area2D
-
+#fireball script that the player shoots
 var speed = 800
 var Damage = null
 var effects = false
@@ -26,8 +26,8 @@ func _on_Area2D_body_entered(body):
 			await $AnimatedSprite2D.animation_finished
 			$AnimatedSprite2D.visible = false
 			await $fireimpact.finished
-			queue_free()  # Optional: destroy bullet on hit
-# make damagae animation and explosion animation and hit sound
+			queue_free()  
+#make damagae animation and explosion animation and hit sound
 
 func outofbody():
 	$AnimatedSprite2D.visible = false

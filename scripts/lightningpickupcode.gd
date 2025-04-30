@@ -1,5 +1,5 @@
 extends Area2D
-
+#lighting ability pickup 
 var player = null
 var entered = false
 

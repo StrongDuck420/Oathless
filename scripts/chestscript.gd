@@ -1,16 +1,16 @@
 extends Area2D
-
+#chest script
 @export var lightning_scene: PackedScene
 var open = false
 var player = null
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	self.body_entered.connect(_on_Area2D_body_entereds)
 	$AnimatedSprite2D.play("idle")
 	player = get_node("/root/Node2D/player") 
 	add_to_group("chests")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _process(_delta):
 		z_index = int(global_position.y)
 
